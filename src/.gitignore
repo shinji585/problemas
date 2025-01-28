@@ -1,3 +1,11 @@
 .vscode
-.class
-lib
+# Ignorar archivos de configuración de IDEs y editores comunes
+.idea/
+.vscode/
+*.swp
+Thumbs.db
+*.DS_Store
+
+# Ignorar directorios lib y bin
+lib/
+bin/

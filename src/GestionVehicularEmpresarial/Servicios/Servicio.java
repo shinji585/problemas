@@ -6,55 +6,63 @@ public class Servicio {
     private double Potencia;
     private double velocidadMaxima;
     private String color; 
-    // creamos dos construcotes uno vacion y uno no 
+
     public Servicio(){
-        // constructor vacio 
     }
-    public Servicio(String tipoMotor,double Potencia,double velocidadMaxima,String color){
+
+    public Servicio(String tipoMotor, double Potencia, double velocidadMaxima, String color){
         this.tipoMotor = tipoMotor;
         this.Potencia = Potencia;
         this.velocidadMaxima = velocidadMaxima;
         this.color = color;
     }
-    // setters 
+
     public void setTipoMotor(String tipoMotor){
         this.tipoMotor = tipoMotor;
     }
-    public void  setPotencia(double Potencia){
+
+    public void setPotencia(double Potencia){
         this.Potencia = Potencia;
     }
-    public void setvelocidadMaxima(double velocidadMaxima){
+
+    public void setVelocidadMaxima(double velocidadMaxima){
         while (velocidadMaxima < 0) {
-            System.out.print("\nla velocidad maxima no tiene que ser negativa\nIngrese la velocidad maxima: ");
+            System.out.print("\nLa velocidad máxima no puede ser negativa. Por favor, ingrese una velocidad válida: ");
             velocidadMaxima = s.nextDouble();
         }
-          this.velocidadMaxima = velocidadMaxima;
+        this.velocidadMaxima = velocidadMaxima;
     }
+
     public void setColor(String color){
-      this.color = color;
+        this.color = color;
     }
-    // creamos los getters 
+
     public String getTipoMotor(){
-         return this.tipoMotor;
+        return this.tipoMotor;
     }
-    public double  getPotencia(){
-         return this.Potencia;
+
+    public double getPotencia(){
+        return this.Potencia;
     }
+
     public double getVelocidadMaxima(){
         return this.velocidadMaxima;
     }
+
     public String getColor(){
         return this.color;
     }
-    // creamos los metodos de nuestra clase 
-    public void Mostrarinformacion(){
-        System.out.printf("\nel tipo de vehiculo es %s\n la potencia de sus vehiculos es %.2f\n la velocidad maxima de los vehiculos es %.2f\n el color de sus vehiculos es %s ",this.tipoMotor,this.Potencia,this.velocidadMaxima,this.color);
+
+    public void MostrarInformacion(){
+        System.out.printf("\nTipo de motor: %s\nPotencia del vehículo: %.2f HP\nVelocidad máxima: %.2f km/h\nColor del vehículo: %s\n", this.tipoMotor, this.Potencia, this.velocidadMaxima, this.color);
     }
+
     public void arrancar(){
-        System.out.println("el vehiculo esta arrancando");
+        System.out.println("El vehículo está arrancando...");
     }
+
     public void detener(){
-        System.out.println("el vehiculo se esta deteniendo");
-        System.out.println("el vehiculo se detuvo");
+        System.out.println("El vehículo se está deteniendo...");
+        System.out.println("El vehículo se ha detenido completamente.");
     }
 }

@@ -1,72 +1,103 @@
 package GestionVehicularEmpresarial.Empresa;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
+import java.util.Scanner;
 
 import GestionVehicularEmpresarial.Servicios.Servicio;
 import GestionVehicularEmpresarial.Servicios.TiposVehiculos.Motocicleta;
 import GestionVehicularEmpresarial.Utiles.Utiles;
-public class Empresa extends Servicio{
-    Utiles validador = new Utiles();
-    Motocicleta motocicleta = new Motocicleta();
-    static  ArrayList<Motocicleta> pasadorCaracteristica = new ArrayList<>();
-    private HashMap<Integer,ArrayList<Motocicleta>> gestionMoto = new HashMap<>();
-    private int ID = 0; 
-    Random r = new Random();
-    public Empresa(){
 
+public class Empresa extends Servicio {
+    Utiles validador = new Utiles();
+    static Scanner s = new Scanner(System.in);
+    Motocicleta motocicleta = new Motocicleta();
+    static ArrayList<Motocicleta> pasadorCaracteristica = new ArrayList<>();
+    private HashMap<Integer, ArrayList<Motocicleta>> gestionMoto = new HashMap<>();
+    private int ID = 0;
+
+    public Empresa() {
     }
-    public Empresa(int id){
+
+    public Empresa(int id) {
         this.ID += id;
     }
-    public void setId(int id){
+
+    public void setId(int id) {
         this.ID += id;
     }
-    public int getId(){
+
+    public int getId() {
         return this.ID;
     }
-    // creamos los metodos que gestionaran nuestros servicios 
-    public ArrayList<Motocicleta> gestionarMotos(){
-        System.out.println("----- Bienvenido a la gestion de motos -------");
-        System.out.println("----- Acontinuacion se le solicitara una serie de datos por favor ingresarlos ------");
-        System.out.println("ingrese el tipo de motor que tiene la motocicleta");
+
+    // Métodos que gestionarán los servicios
+    public ArrayList<Motocicleta> gestionarMotos() {
+        System.out.println("----- Bienvenido al sistema de gestión de motocicletas -----");
+        System.out.println("A continuación, se le solicitará ingresar una serie de datos. Por favor, siga las instrucciones.");
+        
+        System.out.print("Ingrese el tipo de motor que tiene la motocicleta: ");
         motocicleta.setTipoMotor(validador.validadorString());
-        System.out.println("ingrese la potencia maxima que tiene el motor");
+        
+        System.out.print("Ingrese la potencia máxima del motor (en HP): ");
         motocicleta.setPotencia(validador.validarDouble());
-        System.out.println("ingrese la velocidad maxima que tiene la moto");
-        motocicleta.setvelocidadMaxima(validador.validarDouble());
-        System.out.println("ingrese el color que tendran la motocicleta");
+        
+        System.out.print("Ingrese la velocidad máxima de la motocicleta (en km/h): ");
+        motocicleta.setVelocidadMaxima(validador.validarDouble());
+        
+        System.out.print("Ingrese el color de la motocicleta: ");
         motocicleta.setColor(validador.validadorString());
-        // ahora tengo que solicitar los valores que tiene la moto por defecto pero esto solo lo hago utilizando polimorfismo en este programa 
-        System.out.println("----- a continuacion se le solicitara datos importantes sobre la motocicleta -----");
-        System.out.println("ingrese la marca de la motocicleta");
+        
+        System.out.println("----- Información adicional de la motocicleta -----");
+        
+        System.out.print("Ingrese la marca de la motocicleta: ");
         motocicleta.setMarca(validador.validadorString());
-        System.out.println("ingrese el tipo de suspension de la moto");
+        
+        System.out.print("Ingrese el tipo de suspensión de la motocicleta: ");
         motocicleta.setSuspension(validador.validadorString());
-        System.out.println("ingrese el numero de pasajeros maximo de la motocicleta");
+        
+        System.out.print("Ingrese el número máximo de pasajeros que soporta la motocicleta: ");
         motocicleta.setNumeropasajero(validador.validarEntero());
-        System.out.println("ingrese el tipo de motocicleta que se manejara en la empresa");
+        
+        System.out.print("Ingrese el tipo de motocicleta (por ejemplo: deportiva, turismo): ");
         motocicleta.settipoMotocicleta(validador.validadorString());
-        System.out.println("ingrese el peso maximo que puede tener la motocicleta");
+        
+        System.out.print("Ingrese el peso máximo que soporta la motocicleta (en kg): ");
         motocicleta.setpesoMaximo(validador.validarDouble());
-        // pasamos la instancia de motocicleta a el arraylist 
+        
+        // Añadimos la instancia de motocicleta al ArrayList
         pasadorCaracteristica.add(motocicleta);
         return pasadorCaracteristica;
     }
-    // creamos un metodo para manejar todo nuestro hash map 
-    public HashMap<Integer,ArrayList<Motocicleta>> manejarHashmap(){
-        System.out.println("----- a continuacion se le solicita un id por favor ingresar un nuevo cuales quiera ------");
+
+    // Manejar HashMap
+    public HashMap<Integer, ArrayList<Motocicleta>> manejarHashmap() {
+        System.out.print("Ingrese un nuevo ID para registrar las motocicletas: ");
         setId(validador.validarEntero());
-        gestionMoto.put(r.nextInt(getId() * 101), pasadorCaracteristica);
+        gestionMoto.put(getId(), pasadorCaracteristica);
         return gestionMoto;
     }
-    // creamos un metodo para visualizar los valores 
-    public void visualizarHashmap(){
-        for (Map.Entry<Integer, ArrayList<Motocicleta>> entrada : gestionMoto.entrySet()) {
-            System.out.println("Clave: " + entrada.getKey() + ", Valor: " + entrada.getValue());
+
+    // Visualizar contenido del HashMap
+    public void visualizarHashmap() {
+        System.out.println("------- Datos registrados en el sistema -------");
+        if (gestionMoto.isEmpty()) {
+            System.out.println("No hay datos registrados.");
+        } else {
+            for (Map.Entry<Integer, ArrayList<Motocicleta>> entrada : gestionMoto.entrySet()) {
+                System.out.println("ID: " + entrada.getKey() + ", Detalles: " + entrada.getValue());
+            }
+        }
+    }
+
+    // Eliminar datos del HashMap
+    public void eliminarDatos(int valor) {
+        if (gestionMoto.containsKey(valor)) {
+            gestionMoto.remove(valor);
+            System.out.println("El registro con ID " + valor + " ha sido eliminado exitosamente.");
+        } else {
+            System.out.println("El ID ingresado no existe. Por favor, intente nuevamente.");
         }
     }
 }
