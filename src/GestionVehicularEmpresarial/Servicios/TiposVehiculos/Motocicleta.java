@@ -57,7 +57,7 @@ public class Motocicleta extends Servicio {
     }
 
     public void setpesoMaximo(double pesoMaximo) {
-        while (pesoMaximo > 210) {
+        while (pesoMaximo > 300) {
             System.out.println("El peso ingresado excede el límite máximo de carga permitido (120 kg).");
             System.out.print("Por favor, reduzca el peso de la motocicleta para evitar accidentes: ");
             pesoMaximo = s.nextDouble();

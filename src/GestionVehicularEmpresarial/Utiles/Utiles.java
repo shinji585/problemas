@@ -24,7 +24,7 @@ public class Utiles {
 
                 if (valor.matches(".*[?|°&{}^*+\\\\-].*")) {
                     System.out.println("La entrada no puede contener caracteres especiales. Por favor, intente de nuevo.");
-                } else if (valor.isEmpty() || valor.length() <= 1 || Character.isDigit(valor.charAt(0))) {
+                } else if (valor.isEmpty() || valor.length() <= 1) {
                     System.out.println("La entrada no puede estar vacía, ser un único carácter o comenzar con un número.");
                 } else {
                     controlador = false; // La entrada es válida
